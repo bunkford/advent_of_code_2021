@@ -1,10 +1,7 @@
-import os, strutils, sequtils
+import os, strutils, sequtils, aoc
 
 proc solve1(data:seq[string]): int = 
-  var count = newSeqWith(data[0].len, 0)
-  for line in data:
-    for k, v in line:
-      if v == '1': count[k].inc
+  var count = data.mapIt(it.toSeq.mapIt(($it).parseInt)).transpose().mapIt(it.foldl(a + b))
   let gamma = fromBin[int](count.mapIt(if it > data.len div 2: 1 else: 0).join)
   let epsilon = fromBin[int](count.mapIt(if it > data.len div 2: 0 else: 1).join)
   return gamma * epsilon
