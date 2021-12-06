@@ -1,4 +1,4 @@
-import os, strutils, sequtils
+import os, strutils, sequtils, algorithm
 
 type
   LanternFish = object
@@ -37,17 +37,11 @@ proc solve2(data:seq[int], days:int):int64 =
     counts[i] = data.count(i)
 
   for day in 1 .. days:
-    var new_counts = newSeq[int64](9)
-    for i in countdown(counts.high, 0):
-      if i == 0:
-        new_counts[8] = counts[0]
-        new_counts[6] += counts[0]
-      else:
-        new_counts[i-1] = counts[i]
+    counts.rotateLeft(1)
+    counts[6] += counts[8]
 
-    counts = new_counts
+  result = counts.foldl(a + b)
 
-  result = counts.foldl(a + b)  
 
 
 let data = (getAppDir() / "aoc_2021_06.txt").lines.toSeq.mapIt(it.split(",").map(parseInt))[0]
