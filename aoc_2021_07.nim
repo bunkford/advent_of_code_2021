@@ -36,9 +36,31 @@ proc solve2(crabs:seq[int]):int =
   return min(test1, test2)
 
 
+proc test(crabs:seq[int], part:int):int =
+  var fuel_expediture:seq[int]
+  var fuel_expediture_crab_engineering:seq[int]
+  for pos in 0 .. max(crabs):
+    var fuel:int
+    var fuel_crab_engineering:int
+    for crab in crabs:
+      fuel.inc abs(crab - pos)
+      fuel_crab_engineering.inc abs(crab - pos)
+      for cost in 0 .. abs(crab - pos) - 1:
+        fuel_crab_engineering.inc cost
+
+    fuel_expediture_crab_engineering.add(fuel_crab_engineering)
+    fuel_expediture.add(fuel)
+
+  if part == 1:
+    return min(fuel_expediture)
+  elif part == 2: 
+    return min(fuel_expediture_crab_engineering)
+
 let data = (getAppDir() / "aoc_2021_07.txt").lines.toSeq.mapIt(it.split(",").map(parseInt))[0]
 
 
 echo "Answer Part 1: ", solve1(data)
 
 echo "Answer Part 2: ", solve2(data)
+
+echo "Testing every value: ", test(data, 2)
