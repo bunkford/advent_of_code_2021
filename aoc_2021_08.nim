@@ -54,7 +54,7 @@ proc solve2(data:seq[seq[seq[string]]]): int =
 
 
 let data = (getAppDir() / "aoc_2021_08.txt").lines.toSeq.mapIt(it.split(" | ").mapIt(it.split()))
-s
+
 echo "Answer Part 1: ", solve1(data)
 
 echo "Answer Part 2: ", solve2(data)
