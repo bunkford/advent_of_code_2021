@@ -18,6 +18,7 @@ proc solve1(data:seq[string]): int =
 proc solve2(data: seq[string]): int =
   const brackets = {'(':')','[':']','{':'}','<':'>'}.toTable # matching brackets
   const scores = {')':1,']':2,'}':3,'>':4}.toTable
+  
   var line_scores:seq[int]
 
   for line in data:
