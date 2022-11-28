@@ -34,7 +34,7 @@ for i in 0..<polymer.len-1:
 
 echo table
 
-for i in 1 .. 39:
+for i in 1 .. 40:
   var new_table = table
   for key, letter_to_insert in rules:
     var left_side = key[0] & letter_to_insert
